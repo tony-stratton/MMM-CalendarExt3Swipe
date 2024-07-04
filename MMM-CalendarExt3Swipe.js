@@ -15,9 +15,15 @@ Module.register("MMM-CalendarExt3Swipe", {
                 }
             });
 
-            window.addEventListener("keydown", this.handleKeypress.bind(this));
+            window.addEventListener("keydown", this.keydownHandler.bind(this));
             window.addEventListener("touchstart", this.touchStartHandler.bind(this));
             window.addEventListener("touchend", this.touchEndHandler.bind(this));
+        }
+    },
+
+    keydownHandler: function (event) {
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+            this.sendSwipeNotification(event.key);
         }
     },
 
@@ -45,12 +51,6 @@ Module.register("MMM-CalendarExt3Swipe", {
             this.sendSwipeNotification("ArrowLeft");
         } else if (difference < -threshold) {
             this.sendSwipeNotification("ArrowRight");
-        }
-    },
-
-    handleKeypress: function (event) {
-        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-            this.sendSwipeNotification(event.key);
         }
     },
 
